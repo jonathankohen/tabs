@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Tab({ onClick, isActive, tabIndex, name, content }) {
+export default function Tab({ onClick, isActive, tabIndex, name }) {
     const handleTabClick = e => {
         e.preventDefault();
         onClick(tabIndex);
@@ -10,15 +10,13 @@ export default function Tab({ onClick, isActive, tabIndex, name, content }) {
         <>
             <button
                 type="button"
-                className={`btn btn-primary ${
-                    isActive === tabIndex ? 'active' : ''
+                className={`btn btn-lg btn-outline-dark ${
+                    isActive ? 'active' : ''
                 }`}
                 onClick={handleTabClick}
             >
                 {name}
             </button>
-
-            {isActive === tabIndex ? <h1>{content}</h1> : ''}
         </>
     );
 }
