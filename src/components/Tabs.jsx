@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import Tab from './Tab';
-import Display from './Display';
 
 const initialTabIndex = 0;
 
@@ -21,7 +20,8 @@ export default function Tabs({ tabs }) {
                     <Tab
                         key={i}
                         tabIndex={i}
-                        {...tab}
+                        name={tab.name}
+                        content={tab.content}
                         isActive={activeTabIndex}
                         onClick={handleTabClick}
                     />
