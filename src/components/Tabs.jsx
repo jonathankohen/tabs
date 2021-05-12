@@ -1,33 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Tab from './Tab';
 import Display from './Display';
 
-export default function Tabs({ tabs, setTabs }) {
-    const propFunc = newTab => {
-        // setTabs([...tabs, newTab]);
-        setTabs(
-            tabs.map((tb, i) => {
-                if (tb.name === newTab.name) {
-                    tabs.splice(i, 1);
-                }
-            })
+const initialTabIndex = 0;
+
+export default function Tabs({ tabs }) {
+    const [activeTabIndex, setActiveTabIndex] = useState(initialTabIndex);
+
+    const handleTabClick = tabIndex => {
+        setActiveTabIndex(
+            tabIndex === activeTabIndex ? initialTabIndex : tabIndex
         );
     };
+
     return (
         <>
-            <p>
-                <div className="row">
-                    {tabs.map((tab, i) => {
-                        return <Tab key={i} tab={tab} propFunc={propFunc} />;
-                    })}
-                </div>
-            </p>
-            <div className="row">
-                {tabs.map((t, i) => {
-                    return <Display key={i} {...t} />;
-                })}
-            </div>
+            {tabs.map((tab, i) => {
+                return (
+                    <Tab
+                        key={i}
+                        tabIndex={i}
+                        {...tab}
+                        isActive={activeTabIndex}
+                        onClick={handleTabClick}
+                    />
+                );
+            })}
         </>
     );
 }
